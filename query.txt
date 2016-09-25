@@ -1,0 +1,89 @@
+Query
+
+The following is a dsl of the query with comments, and below that is a raw POST query to the ES index.
+
+dsl.query = {
+    function_score: {
+        // down-weight names with more tokens
+        functions: [
+            { field_value_factor: {
+                field: 'name.length',
+                modifier: 'reciprocal'
+            }}
+        ],
+        query: {
+            bool: { should: [
+                { multi_match: {
+                    fields: [
+                        'name^1000', 'name_suggester'
+                    ],
+                    query: searchParams.txt,
+                    // must contain a each token
+                    operator: 'and',
+                    // tokens in the right order
+                    type:  'phrase',
+                    // tokens can be re-ordered,
+                    // but score goes down.
+                    slop: 50
+                }},
+                // but boost hits that contain
+                // some exact matches
+                { match: {
+                    name: {
+                        query: searchParams.txt,
+                        operator: 'or',
+                        boost: 2
+                    }
+                }}
+            ]}
+        }
+    }
+};
+
+
+POST entity-search/_search
+{
+   "fields": [
+      "name"
+   ],
+   "query": {
+      "function_score": {
+         "functions": [
+            {
+               "field_value_factor": {
+                  "field": "name.length",
+                  "modifier": "reciprocal",
+                  "factor": 0.1
+               }
+            }
+         ],
+         "query": {
+            "bool": {
+               "should": [
+                  {
+                     "multi_match": {
+                        "fields": [
+                           "name^1000",
+                           "name_suggester"
+                        ],
+                        "query": "INSERT-QUERY-ENTITY-HERE",
+                        "operator": "and",
+                        "type": "phrase",
+                        "slop": 50
+                     }
+                  },
+                  {
+                     "match": {
+                        "name": {
+                           "query": "INSERT-QUERY-ENTITY-HERE",
+                           "operator": "or",
+                           "boost": 2
+                        }
+                     }
+                  }
+               ]
+            }
+         }
+      }
+   }
+}

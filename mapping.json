@@ -1,0 +1,193 @@
+{
+  "_all": {
+    "analyzer": "med_search_analyzer",
+    "search_analyzer": "med_search_analyzer",
+    "type": "string"
+  },
+  "properties": {
+    "current_flag": {
+      "type": "string"
+    },
+    "date_active": {
+      "type": "date"
+    },
+    "date_inactive": {
+      "type": "date"
+    },
+    "end_date": {
+      "type": "date"
+    },
+    "fax_number": {
+      "type": "string"
+    },
+    "id_cfpb": {
+      "type": "string"
+    },
+    "id_nmls": {
+      "type": "string"
+    },
+    "id_rssd": {
+      "type": "string"
+    },
+    "id_tax": {
+      "type": "string"
+    },
+    "inst_status_code": {
+      "type": "string"
+    },
+    "inst_status_desc": {
+      "fields": {
+        "raw": {
+          "index": "not_analyzed",
+          "type": "string"
+        }
+      },
+      "type": "string"
+    },
+    "inst_type_code": {
+      "type": "string"
+    },
+    "inst_type_desc": {
+      "fields": {
+        "raw": {
+          "index": "not_analyzed",
+          "type": "string"
+        }
+      },
+      "type": "string"
+    },
+    "mail_city": {
+      "fields": {
+        "raw": {
+          "index": "not_analyzed",
+          "type": "string"
+        }
+      },
+      "type": "string"
+    },
+    "mail_country_id": {
+      "type": "integer"
+    },
+    "mail_country_name": {
+      "fields": {
+        "raw": {
+          "index": "not_analyzed",
+          "type": "string"
+        }
+      },
+      "type": "string"
+    },
+    "mail_postal_code": {
+      "type": "string"
+    },
+    "mail_region_abbrev": {
+      "type": "string"
+    },
+    "mail_region_id": {
+      "type": "string"
+    },
+    "mail_region_name": {
+      "fields": {
+        "raw": {
+          "index": "not_analyzed",
+          "type": "string"
+        }
+      },
+      "type": "string"
+    },
+    "mail_state_province": {
+      "type": "string"
+    },
+    "mail_street_address": {
+      "type": "string"
+    },
+    "name": {
+      "copy_to": "name_suggester",
+      "type": "string",
+      "analyzer": "med_search_analyzer",
+      "fields": {
+        "length": { 
+          "type":     "token_count",
+          "analyzer": "med_search_analyzer"
+        }
+      }
+    },
+    "name_short": {
+      "type": "string"
+    },
+    "name_suggester": {
+      "analyzer": "autocomplete",
+      "search_analyzer": "standard",
+      "type": "string"
+    },
+    "phone_number": {
+      "type": "string"
+    },
+    "physical_city": {
+      "fields": {
+        "raw": {
+          "index": "not_analyzed",
+          "type": "string"
+        }
+      },
+      "type": "string"
+    },
+    "physical_country_id": {
+      "type": "string"
+    },
+    "physical_country_name": {
+      "type": "string"
+    },
+    "physical_postal_code": {
+      "type": "string"
+    },
+    "physical_region_abbrev": {
+      "type": "string"
+    },
+    "physical_region_id": {
+      "type": "string"
+    },
+    "physical_region_name": {
+      "fields": {
+        "raw": {
+          "index": "not_analyzed",
+          "type": "string"
+        }
+      },
+      "type": "string"
+    },
+    "physical_state_province": {
+      "fields": {
+        "raw": {
+          "index": "not_analyzed",
+          "type": "string"
+        }
+      },
+      "type": "string"
+    },
+    "physical_street_address": {
+      "type": "string"
+    },
+    "prudential_regulator_code": {
+      "type": "string"
+    },
+    "prudential_regulator_name": {
+      "fields": {
+        "raw": {
+          "index": "not_analyzed",
+          "type": "string"
+        }
+      },
+      "type": "string"
+    },
+    "record_type": {
+      "type": "string"
+    },
+    "start_date": {
+      "type": "date"
+    },
+    "url_main": {
+      "type": "string"
+    }
+  }
+}
